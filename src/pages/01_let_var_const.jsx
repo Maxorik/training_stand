@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Editor } from '../Editor'
 
 const Content_01 = () => {
-    const [code, setCode] = useState(`console.log(12); const a = 90;`)
+    let str = `let a = 5; \nconsole.log(a)`
 
-    return <Editor code={code} rows={2}/>
+    return <Editor code={ str } rows={13}/>
 
 }
 

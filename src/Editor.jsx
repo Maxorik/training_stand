@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { gruvboxLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -7,19 +7,24 @@ export const Editor = memo(({code, rows}) => {
 
     const [editedCode, setEditedCode] = useState(code);
     const [editMode, setEditMode] = useState(false);
-    const [editText, setEditText] = useState('edit');
+    const [btnText, setBtnText] = useState('edit');
 
-    const [codeConsole, setCodeConsole] = useState(code); // TODO
+    const [codeConsole, setCodeConsole] = useState(useParseTextToCode(code));
 
-    function onEditHandler() {
+    /** изменить режим редактирование\чтение */
+    function onSetEditMode() {
         setEditMode(!editMode);
-        const editBtnText = editMode ? 'edit' : 'show';
-        setEditText(editBtnText)
+        const editBtnText = editMode ? 'edit' : 'read';
+        setBtnText(editBtnText)
     }
+
+    useEffect(() => {
+        setCodeConsole(useParseTextToCode(editedCode));
+    }, [editedCode])
 
     return <>
         <div className='editor-interface'>
-            <button className='btn editor-btn' onClick={onEditHandler}>{ editText }</button>
+            <button className='btn editor-btn' onClick={onSetEditMode}>{ btnText }</button>
         </div>
         <div className='editor-container' style={{height: editorHeight}}>
             <div className='editor-code'>
@@ -41,3 +46,25 @@ export const Editor = memo(({code, rows}) => {
         </div>
     </>
 })
+
+
+/** TODO доработать парсер, чтобы он принимал
+ * console.log(`${elem}`)
+ * console.log('one', two)
+*/
+function useParseTextToCode(text) {
+    let logMessages = [];
+    const regex = /console.log((.*?));/g;
+    let match;
+
+    if (typeof text === "string") {
+        while ((match = regex.exec(text)) !== null) {
+            logMessages.push(match[1].trim())
+                // .slice(2, -2));
+        }
+    }
+
+    console.log(logMessages)
+
+    return logMessages.join('\n');
+}
