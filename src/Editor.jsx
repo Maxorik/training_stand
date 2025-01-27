@@ -2,12 +2,11 @@ import React, { memo, useState, useEffect } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { gruvboxLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-export const Editor = memo(({code, rows}) => {
-    const editorHeight = rows ? rows * 25 : 200;
-
+export const Editor = memo(({ code }) => {
     const [editedCode, setEditedCode] = useState(code);
     const [editMode, setEditMode] = useState(false);
     const [btnText, setBtnText] = useState('edit');
+    const [editorHeight, setEditorHeight] = useState((code.match(/[\\n]/g).length + 2) * 25); // TODO динамическое растягивание textarea
 
     const [codeConsole, setCodeConsole] = useState('');
 
@@ -58,16 +57,13 @@ async function runScriptText(code) {
     const originalConsoleLog = console.log;
     console.log = function(...args) {
         consoleOutput.push(args.join(' '));
-        originalConsoleLog.apply(console, args);
     };
 
     /** Переопределяем setTimeout */
+    const timeouts = [];
     const originalSetTimeout = window.setTimeout;
     window.setTimeout = function(callback, delay, ...args) {
-        const wrappedCallback = function() {
-            callback.apply(this, args);
-        };
-        return originalSetTimeout(wrappedCallback, delay);
+        timeouts.push({callback, delay, ...args});
     }
 
     try {
@@ -76,9 +72,14 @@ async function runScriptText(code) {
     } catch (error) {
         codeResult = error.message;
     } finally {
-        // возвращаем базовые функции
-        console.log = originalConsoleLog;
+        /** TODO выполняем макротаски (без учета вложенных в них макротасок...) - добавить рекурсию, пока timeouts.length */
+        timeouts.sort((a, b) => a.delay - b.delay);
+        timeouts.forEach(f => {
+            f.callback();
+        })
+
         window.setTimeout = originalSetTimeout;
+        console.log = originalConsoleLog;
     }
 
     return [codeResult, consoleOutput];
