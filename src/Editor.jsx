@@ -9,7 +9,7 @@ export const Editor = memo(({code, rows}) => {
     const [editMode, setEditMode] = useState(false);
     const [btnText, setBtnText] = useState('edit');
 
-    const [codeConsole, setCodeConsole] = useState(useParseTextToCode(code));
+    const [codeConsole, setCodeConsole] = useState('');
 
     /** изменить режим редактирование\чтение */
     function onSetEditMode() {
@@ -19,7 +19,10 @@ export const Editor = memo(({code, rows}) => {
     }
 
     useEffect(() => {
-        setCodeConsole(useParseTextToCode(editedCode));
+        runScriptText(editedCode).then(([codeResult, consoleOutput]) => {
+            setCodeConsole(consoleOutput.join('\n'));
+        });
+
     }, [editedCode])
 
     return <>
@@ -47,24 +50,36 @@ export const Editor = memo(({code, rows}) => {
     </>
 })
 
+async function runScriptText(code) {
+    const consoleOutput = [];
+    let codeResult;
 
-/** TODO доработать парсер, чтобы он принимал
- * console.log(`${elem}`)
- * console.log('one', two)
-*/
-function useParseTextToCode(text) {
-    let logMessages = [];
-    const regex = /console.log((.*?));/g;
-    let match;
+    /** Переопределяем console.log */
+    const originalConsoleLog = console.log;
+    console.log = function(...args) {
+        consoleOutput.push(args.join(' '));
+        originalConsoleLog.apply(console, args);
+    };
 
-    if (typeof text === "string") {
-        while ((match = regex.exec(text)) !== null) {
-            logMessages.push(match[1].trim())
-                // .slice(2, -2));
-        }
+    /** Переопределяем setTimeout */
+    const originalSetTimeout = window.setTimeout;
+    window.setTimeout = function(callback, delay, ...args) {
+        const wrappedCallback = function() {
+            callback.apply(this, args);
+        };
+        return originalSetTimeout(wrappedCallback, delay);
     }
 
-    console.log(logMessages)
+    try {
+        const func = new Function(code);
+        codeResult = await func();
+    } catch (error) {
+        codeResult = error.message;
+    } finally {
+        // возвращаем базовые функции
+        console.log = originalConsoleLog;
+        window.setTimeout = originalSetTimeout;
+    }
 
-    return logMessages.join('\n');
+    return [codeResult, consoleOutput];
 }
