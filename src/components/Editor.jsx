@@ -1,8 +1,11 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { gruvboxLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import '../style/editor.scss'
 
+// TODO memo Работает?
 export const Editor = memo(({ code }) => {
+    const initialCode = code;
     const [editedCode, setEditedCode] = useState(code);
     const [editMode, setEditMode] = useState(false);
     const [btnText, setBtnText] = useState('edit');
@@ -24,9 +27,10 @@ export const Editor = memo(({ code }) => {
 
     }, [editedCode])
 
-    return <>
+    return <div className='editor-area'>
         <div className='editor-interface'>
             <button className='btn editor-btn' onClick={onSetEditMode}>{ btnText }</button>
+            <button className='btn editor-btn' onClick={ () => setEditedCode(initialCode) }>reset</button>
         </div>
         <div className='editor-container' style={{height: editorHeight}}>
             <div className='editor-code'>
@@ -46,7 +50,7 @@ export const Editor = memo(({ code }) => {
                 </SyntaxHighlighter>
             </div>
         </div>
-    </>
+    </div>
 })
 
 async function runScriptText(code) {

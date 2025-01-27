@@ -1,0 +1,79 @@
+.editor-area {
+  margin: 20px 0 60px 0;
+}
+
+.editor-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-interface {
+  width: 1000px;
+  height: 20px;
+  margin: 5px auto;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.editor-code {
+  width: 500px;
+  height: 100%;
+}
+
+.read-code-area {
+  margin: 0 !important;
+  height: calc(100% - 2em);
+
+  background: linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%) 0 0 / 3em 3em local content-box rgb(253, 253, 253) !important;
+}
+
+.results-area {
+  width: 500px;
+  height: 100%;
+}
+
+.read-code-area {
+  height: 100%;
+  border: 1px solid rgba(79, 75, 75, 0.88);
+  border-radius: 4px;
+}
+
+.edit-code-area {
+  height: 100%;
+
+  textarea {
+    background: linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%) 0 0 / 3em 3em local content-box rgb(253, 253, 253);
+    width: calc(100% - 2.1em);
+    height: 100%;
+    resize: none;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 1em;
+  }
+}
+
+.btn {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &.editor-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+
+    &:hover {
+      background-color: #555555;
+      color: white;
+    }
+  }
+}

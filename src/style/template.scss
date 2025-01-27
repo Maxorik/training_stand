@@ -1,0 +1,38 @@
+.content-text {
+  font-family: "Graphik", sans-serif;
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin: 3rem 0;
+}
+
+.key-info {
+  width: calc(100% - 30px);
+  height: auto;
+  background-color: #fffdc7;
+  padding: 15px;
+}
+
+.content {
+  width: calc(100% - 36px);
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  padding: 15px;
+  margin: 15px auto;
+  height: 66vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.anchors {
+  width: 100%;
+  height: auto;
+  background-color: #c7fff8;
+  padding: 15px 0;
+}
+
+.anchor-part {
+  margin: 7px 15px;
+  gap: 5px;
+}
