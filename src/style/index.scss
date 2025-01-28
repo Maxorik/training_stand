@@ -13,9 +13,9 @@ code {
     monospace;
 }
 
-.base-container {
-  width: 1000px;
-  margin: 0 auto;
+.app-container {
+  display: flex;
+  gap: 100px;
 }
 
 hr {

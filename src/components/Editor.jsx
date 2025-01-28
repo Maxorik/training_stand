@@ -24,7 +24,6 @@ export const Editor = memo(({ code }) => {
         runScriptText(editedCode).then(([codeResult, consoleOutput]) => {
             setCodeConsole(consoleOutput.join('\n'));
         });
-
     }, [editedCode])
 
     return <div className='editor-area'>

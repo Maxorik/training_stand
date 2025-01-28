@@ -1,0 +1,23 @@
+.nav-area {
+  min-width: 270px;
+  width: auto;
+  height: calc(100vh - 30px);
+  background-color: #f7f7f7;
+  padding: 15px;
+}
+
+li {
+  list-style-type: none;
+  line-height: 1.6em;
+  font-size: 20px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: rgba(27, 5, 40, 0.68);
+      transition: 0.2s;
+    }
+  }
+}

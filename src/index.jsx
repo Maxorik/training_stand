@@ -1,12 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
-import { PagesMama } from "./pagesMama";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import './style/index.scss';
+import { Navigation } from "./navigation";
+import { PromisesPage } from "./pages/promises";
+
+
+import { Content_01 } from "./pages/test_page";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-    <>
-        <PagesMama />
-    </>
+    <div className='app-container'>
+        <BrowserRouter>
+            <Navigation />
+            <Routes>
+                <Route path="promise" element={<PromisesPage />} />
+                <Route path="/" element={<Content_01 />} />
+            </Routes>
+        </BrowserRouter>
+    </div>
 );
