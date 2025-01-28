@@ -5,11 +5,11 @@ import '../style/editor.scss'
 
 // TODO memo Работает?
 export const Editor = memo(({ code }) => {
-    const initialCode = code;
-    const [editedCode, setEditedCode] = useState(code);
+    const initialCode = code.trim();
+    const [editedCode, setEditedCode] = useState(code.trim());
     const [editMode, setEditMode] = useState(false);
     const [btnText, setBtnText] = useState('edit');
-    const [editorHeight, setEditorHeight] = useState((code.match(/[\\n]/g).length + 2) * 25); // TODO динамическое растягивание textarea
+    const [editorHeight, setEditorHeight] = useState(code.match(/[\\n]/g).length * 25); // TODO динамическое растягивание textarea
 
     const [codeConsole, setCodeConsole] = useState('');
 
