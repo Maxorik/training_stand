@@ -6,12 +6,12 @@ import { PageTemplate } from "../components/PageTemplate";
 const promise_example = `
 let isLoading = true
 
-fetch(\`https://swapi.dev/api/films/id/\`)
+fetch(\`https://swapi.dev/api/films/\`)
   .then(function (movies) {
-    renderList(movies)
+    console.log(movies)
   })
   .catch(function (err) {
-    renderErrorMessage(err)
+    console.log(err)
   })
   .finally(function () {
     isLoading = false

@@ -3,13 +3,12 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { gruvboxLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import '../style/editor.scss'
 
-// TODO memo Работает?
 export const Editor = memo(({ code }) => {
     const initialCode = code.trim();
     const [editedCode, setEditedCode] = useState(code.trim());
     const [editMode, setEditMode] = useState(false);
     const [btnText, setBtnText] = useState('edit');
-    const [editorHeight, setEditorHeight] = useState(code.match(/[\\n]/g).length * 25); // TODO динамическое растягивание textarea
+    const [editorHeight, setEditorHeight] = useState(code.match(/[\\n]/g).length * 25); // TODO setEditorHeight
 
     const [codeConsole, setCodeConsole] = useState('');
 
@@ -56,33 +55,40 @@ async function runScriptText(code) {
     const consoleOutput = [];
     let codeResult;
 
-    /** Переопределяем console.log */
-    const originalConsoleLog = console.log;
-    console.log = function(...args) {
-        consoleOutput.push(args.join(' '));
-    };
-
-    /** Переопределяем setTimeout */
-    const timeouts = [];
-    const originalSetTimeout = window.setTimeout;
-    window.setTimeout = function(callback, delay, ...args) {
-        timeouts.push({callback, delay, ...args});
-    }
-
-    try {
+    /** FIXME Сейчас асинхронный код не поддерживается */
+    if (/(await|\.then\(|\.catch\(|Promise)/.test(code)) {
         const func = new Function(code);
-        codeResult = await func();
-    } catch (error) {
-        codeResult = error.message;
-    } finally {
-        /** TODO выполняем макротаски (без учета вложенных в них макротасок...) - добавить рекурсию, пока timeouts.length */
-        timeouts.sort((a, b) => a.delay - b.delay);
-        timeouts.forEach(f => {
-            f.callback();
-        })
+        codeResult = func();
+        consoleOutput.push('Асинхронный код \nне поддерживается. \nОткрой консоль браузера.');
+    } else {
+        /** Переопределяем console.log */
+        const originalConsoleLog = console.log;
+        console.log = function(...args) {
+            consoleOutput.push(args.join(' '));
+        };
 
-        window.setTimeout = originalSetTimeout;
-        console.log = originalConsoleLog;
+        /** Переопределяем setTimeout */
+        const timeouts = [];
+        const originalSetTimeout = window.setTimeout;
+        window.setTimeout = function(callback, delay, ...args) {
+            timeouts.push({callback, delay, ...args});
+        }
+
+        try {
+            const func = new Function(code);
+            codeResult = await func();
+        } catch (error) {
+            codeResult = error.message;
+        } finally {
+            /** TODO ветка pr/editor_async */
+            timeouts.sort((a, b) => a.delay - b.delay);
+            timeouts.forEach(f => {
+                f.callback();
+            })
+
+            window.setTimeout = originalSetTimeout;
+            console.log = originalConsoleLog;
+        }
     }
 
     return [codeResult, consoleOutput];
