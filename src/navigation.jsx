@@ -9,6 +9,9 @@ export const Navigation = () => {
                 <li>
                     <Link to="/promise">промисы</Link>
                 </li>
+                <li>
+                    <Link to="/this+bind">this</Link>
+                </li>
             </ul>
         </nav>
     </div>

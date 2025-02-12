@@ -3,14 +3,15 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { gruvboxLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import '../style/editor.scss'
 
-export const Editor = memo(({ code }) => {
+export const Editor = memo(({ code, height }) => {
     const initialCode = code.trim();
     const [editedCode, setEditedCode] = useState(code.trim());
     const [editMode, setEditMode] = useState(false);
     const [btnText, setBtnText] = useState('edit');
-    const [editorHeight, setEditorHeight] = useState(code.match(/[\\n]/g).length * 25); // TODO setEditorHeight
-
     const [codeConsole, setCodeConsole] = useState('');
+
+    const kH = 29; // высота строки
+    const editorHeight = height ? height * kH : code.match(/[\\n]/g).length * kH;
 
     /** изменить режим редактирование\чтение */
     function onSetEditMode() {
