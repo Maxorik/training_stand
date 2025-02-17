@@ -10,17 +10,19 @@
 }
 
 .editor-interface {
-  width: 1000px;
+  width: 945px;
   height: 20px;
   margin: 5px auto;
   display: flex;
   align-items: baseline;
   gap: 2px;
+  justify-content: space-between;
 }
 
 .editor-code {
   width: 720px;
   height: 100%;
+  overflow-x: unset;
 }
 
 .read-code-area {
@@ -76,4 +78,8 @@
       color: white;
     }
   }
+}
+
+.editor-console-title {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
 }

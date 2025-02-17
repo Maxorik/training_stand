@@ -28,8 +28,11 @@ export const Editor = memo(({ code, height }) => {
 
     return <div className='editor-area'>
         <div className='editor-interface'>
-            <button className='btn editor-btn' onClick={onSetEditMode}>{ btnText }</button>
-            <button className='btn editor-btn' onClick={ () => setEditedCode(initialCode) }>reset</button>
+            <div>
+                <button className='btn editor-btn' onClick={onSetEditMode}>{ btnText }</button>
+                <button className='btn editor-btn' onClick={ () => setEditedCode(initialCode) }>reset</button>
+            </div>
+            <div className='editor-console-title'>console</div>
         </div>
         <div className='editor-container' style={{height: editorHeight}}>
             <div className='editor-code'>

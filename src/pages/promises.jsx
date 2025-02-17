@@ -159,25 +159,25 @@ const page_content = {
 Поменять состояние можно только один раз: перейти из pending либо в **fulfilled**, либо в **rejected**.
 
 После создания, промис находится в состоянии ожидания **pending**. Когда асинхронная операция завершается, функция переводит промис в состояние успеха **fulfilled** или ошибки **rejected**.`}
-<Editor code={ promise_example } /><hr />
+<Editor code={ promise_example } height={ 10 } /><hr />
 {`
 
 У промисов есть 4 основных метода. На собеседовании могут попросить реализовать либо использовать какой-то из них.
 
 1. **Promise.all()** - вернет либо массив с результатами ВСЕХ промисов, либо ошибку для первого встреченного **rejected**.`}
-<Editor code={ promise_all } /><hr />
+<Editor code={ promise_all } height={ 28 } /><hr />
 {`
 
 2. **Promise.allSettled()** - вернет массив объектов вида {status: 'fulfilled', value: 'p1'} | {status: 'rejected', reason: 'p2'}`}
-<Editor code={ promise_all_settled } /><hr />
+<Editor code={ promise_all_settled } height={ 28 } /><hr />
 {`
 
 3. **Promise.any()** - вернет первый полученный результат промиса либо ошибку, что ВСЕ промисы **rejected**`}
-<Editor code={ promise_any } /><hr />
+<Editor code={ promise_any } height={ 25 } /><hr />
 {`
 
 4. **Promise.race()** - вернет исход для первого выполненного промиса - это будет либо полученный его результат, либо ошибка`}
-<Editor code={ promise_race } /><hr />
+<Editor code={ promise_race } height={ 18 } /><hr />
 {`важно:
 при реализации, если важен порядок промисов (для **Promise.all** и **Promise.allSettled**), то используем индекс.
 ВСЕ инкременты проводятся в **then()**, т.к. это микротаски, они выполнятся ПОСЛЕ синхронного кода`
