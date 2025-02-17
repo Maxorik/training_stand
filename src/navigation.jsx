@@ -7,10 +7,13 @@ export const Navigation = () => {
         <nav>
             <ul>
                 <li>
-                    <Link to="/promise">промисы</Link>
+                    <Link to="/varlet">var let const</Link>
                 </li>
                 <li>
                     <Link to="/this+bind">this</Link>
+                </li>
+                <li>
+                    <Link to="/promise">promises</Link>
                 </li>
             </ul>
         </nav>

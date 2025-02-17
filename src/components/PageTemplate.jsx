@@ -36,7 +36,7 @@ export const PageTemplate = function ({ title, keywords, content, anchors }) {
 /** Парсим и подсвечиваем текст */
 const HighlightedText = ({ text }) => {
     const regex = {
-        code: /\*\*\S*?\*\*/g
+        code: /\*\*.*?\*\*/g
     }
 
     const highlightMatches = (str) => {
