@@ -18,6 +18,9 @@ export const Navigation = () => {
                 <li>
                     <Link to="/functions">functions</Link>
                 </li>
+                <li>
+                    <Link to="/objects">objects</Link>
+                </li>
             </ul>
         </nav>
     </div>
