@@ -5,7 +5,7 @@ export const PageTemplate = function ({ title, keywords, content, anchors }) {
     return(
         <div className='base-container'>
             <h1>{ title }</h1>
-            <div className='key-info'>💡 { keywords }</div>
+            { keywords && <div className='key-info'>💡 { keywords }</div> }
             <div className='content'>{ content.props.children.map((c, idx) => {
                 if (typeof c !== 'string') {
                     return <div key={`content-${idx}`}>{c}</div>
@@ -18,7 +18,7 @@ export const PageTemplate = function ({ title, keywords, content, anchors }) {
                     </div> : <></> )
                 }
             })}</div>
-            <div className='anchors'>{ anchors.map(a => {
+            { anchors[0] && <div className='anchors'>{ anchors.map(a => {
                 const parts = a.split(' ');
                 return(
                     <div className='anchor-part' key={a}>
@@ -28,7 +28,7 @@ export const PageTemplate = function ({ title, keywords, content, anchors }) {
                     </div>
                 )
             }) }
-            </div>
+            </div> }
         </div>
     )
 }

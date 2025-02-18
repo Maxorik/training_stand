@@ -15,6 +15,9 @@ export const Navigation = () => {
                 <li>
                     <Link to="/promise">promises</Link>
                 </li>
+                <li>
+                    <Link to="/functions">functions</Link>
+                </li>
             </ul>
         </nav>
     </div>
