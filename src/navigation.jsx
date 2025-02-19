@@ -13,16 +13,19 @@ export const Navigation = () => {
                     <Link to="/this+bind">this</Link>
                 </li>
                 <li>
-                    <Link to="/promise">promises</Link>
+                    <Link to="/functions">functions</Link>
                 </li>
                 <li>
-                    <Link to="/functions">functions</Link>
+                    <Link to="/array">array</Link>
                 </li>
                 <li>
                     <Link to="/objects">objects</Link>
                 </li>
                 <li>
                     <Link to="/mapset">map set</Link>
+                </li>
+                <li>
+                    <Link to="/promise">promises</Link>
                 </li>
             </ul>
         </nav>

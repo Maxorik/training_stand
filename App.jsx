@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './src/style/index.scss';
 import { Navigation } from "./src/navigation";
-import {PromisesPage, ThisBindPage, VarLetPage, FunctionsPage, ObjectsPage, MapSetPage} from "./src/pages";
+import {PromisesPage, ThisBindPage, VarLetPage, FunctionsPage, ObjectsPage, MapSetPage, ArrayPage} from "./src/pages";
 
 
 import { Content_01 } from "./src/pages/test_page";
@@ -19,6 +19,7 @@ root.render(
                 <Route path="promise" element={<PromisesPage />} />
                 <Route path="this+bind" element={<ThisBindPage />} />
                 <Route path="functions" element={<FunctionsPage />} />
+                <Route path="array" element={<ArrayPage />} />
                 <Route path="objects" element={<ObjectsPage />} />
                 <Route path="mapset" element={<MapSetPage />} />
                 <Route path="/" element={<Content_01 />} />
