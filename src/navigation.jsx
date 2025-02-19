@@ -21,6 +21,9 @@ export const Navigation = () => {
                 <li>
                     <Link to="/objects">objects</Link>
                 </li>
+                <li>
+                    <Link to="/mapset">map set</Link>
+                </li>
             </ul>
         </nav>
     </div>
