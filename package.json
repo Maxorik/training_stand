@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite docs",
     "serve": "vite preview"
   },
   "eslintConfig": {
