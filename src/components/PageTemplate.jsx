@@ -4,31 +4,33 @@ import '../style/template.scss'
 export const PageTemplate = function ({ title, keywords, content, anchors }) {
     return(
         <div className='base-container'>
-            <h1>{ title }</h1>
-            { keywords && <div className='key-info'>💡 { keywords }</div> }
-            <div className='content'>{ content.props.children.map((c, idx) => {
-                if (typeof c !== 'string') {
-                    return <div key={`content-${idx}`}>{c}</div>
-                } else {
-                    return (
-                    c.length > 1 ? <div key={`content-${idx}`}>
-                        { c.trim().split('\n').map((pc, idx) =>
-                           <span className='content-text' key={`content-str-${idx}`}><HighlightedText text={pc} /><br /></span>
-                        )}
-                    </div> : <></> )
-                }
-            })}</div>
-            { anchors[0] && <div className='anchors'>{ anchors.map(a => {
-                const parts = a.split(' ');
-                return(
-                    <div className='anchor-part' key={a}>
-                        <span>{parts[0]}  </span>
-                        <a href={parts[1]} target='_blank'>{parts[1]}</a>
-                        <br />
-                    </div>
-                )
-            }) }
-            </div> }
+            <div className='content-container'>
+                <h1>{ title }</h1>
+                { keywords && <div className='key-info'>💡 { keywords }</div> }
+                <div className='content'>{ content.props.children.map((c, idx) => {
+                    if (typeof c !== 'string') {
+                        return <div key={`content-${idx}`}>{c}</div>
+                    } else {
+                        return (
+                            c.length > 1 ? <div key={`content-${idx}`}>
+                                { c.trim().split('\n').map((pc, idx) =>
+                                    <span className='content-text' key={`content-str-${idx}`}><HighlightedText text={pc} /><br /></span>
+                                )}
+                            </div> : <></> )
+                    }
+                })}</div>
+                { anchors[0] && <div className='anchors'>{ anchors.map(a => {
+                    const parts = a.split(' ');
+                    return(
+                        <div className='anchor-part' key={a}>
+                            <span>{parts[0]}  </span>
+                            <a href={parts[1]} target='_blank'>{parts[1]}</a>
+                            <br />
+                        </div>
+                    )
+                }) }
+                </div> }
+            </div>
         </div>
     )
 }
