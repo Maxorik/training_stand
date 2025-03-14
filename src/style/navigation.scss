@@ -3,24 +3,42 @@
   width: auto;
   height: calc(100vh - 30px);
   background-color: #f7f7f7;
-  padding: 15px;
   position: fixed;
   top: 0;
   left: 0;
+
+  nav {
+    padding: 0 15px;
+  }
+
+  .nav-title {
+    width: 270px;
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .nav-section {
+    background: rgba(187, 239, 253, 0.3);
+    margin-top: 20px;
+    margin-bottom: -12px;
+    padding-left: 20px;
+    font-size: 22px;
+    font-weight: 500;
+  }
 }
 
 li {
   list-style-type: none;
   line-height: 1.6em;
   font-size: 20px;
+  cursor: pointer;
 
-  a {
-    text-decoration: none;
-    color: inherit;
-
-    &:hover {
-      color: rgba(27, 5, 40, 0.68);
-      transition: 0.2s;
-    }
+  &:hover {
+    transition: 0.2s;
+    background: rgba(187, 239, 253, 0.3);
   }
+}
+
+.selected-nav {
+  background: rgba(255, 229, 100, 0.2);
 }

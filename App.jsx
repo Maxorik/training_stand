@@ -5,9 +5,6 @@ import './src/style/index.scss';
 import { Navigation } from "./src/navigation";
 import {PromisesPage, ThisBindPage, VarLetPage, FunctionsPage, ObjectsPage, MapSetPage, ArrayPage} from "./src/pages";
 
-
-import { Content_01 } from "./src/pages/test_page";
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -15,6 +12,8 @@ root.render(
         <BrowserRouter>
             <Navigation />
             <Routes>
+                {['/', 'training_stand', 'varlet'].map(path => <Route path={path} element={<VarLetPage />} />)}
+                <Route path="training_stand" element={<VarLetPage />} />
                 <Route path="varlet" element={<VarLetPage />} />
                 <Route path="promise" element={<PromisesPage />} />
                 <Route path="this+bind" element={<ThisBindPage />} />
@@ -22,7 +21,6 @@ root.render(
                 <Route path="array" element={<ArrayPage />} />
                 <Route path="objects" element={<ObjectsPage />} />
                 <Route path="mapset" element={<MapSetPage />} />
-                <Route path="/" element={<Content_01 />} />
             </Routes>
         </BrowserRouter>
     </div>
